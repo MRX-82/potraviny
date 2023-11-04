@@ -8,6 +8,11 @@ def index(request):
 
 
 def registration_form(request):
+    """
+    form for registration new users
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         name = request.POST.get("name")
         login = request.POST.get("login")
