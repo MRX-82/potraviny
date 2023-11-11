@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import UserForm, EnterShop
-from .models import User
+from .forms import UserForm, EnterShop, AddProduct
+from .models import User, Product
 
 def index(request):
     """
@@ -93,5 +93,27 @@ def my_admin(request, user_id):
     id = User.objects.get(id=user_id)
     user_name = id.name
     return render(request, "my_admin.html", {"user_name": user_name})
+
+def add_product(request, user_id):
+    """
+    This is function for add Product. Only for Admin
+    :param request:
+    :param user_id:
+    :return:
+    """
+    id = User.objects.get(id=user_id)
+    user_name = id.name
+    if request.method == "POST":
+        name = request.POST.get('name')
+        coast = request.POST.get('coast')
+        article = request.POST.get('article')
+        image = request.POST.get('image')
+        new_product = Product.objects.create(name=name, coast=coast, article=article, image=image)
+        new_product.save()
+    else:
+        userform = AddProduct()
+        return render(request, "add_product.html", {"form": userform, "user_name": user_name})
+
+    #return render(request, "add_product.html", {"user_name": user_name})
 
 

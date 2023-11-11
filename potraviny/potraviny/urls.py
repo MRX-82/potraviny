@@ -25,4 +25,5 @@ urlpatterns = [
     path('potraviny_shop/<int:user_id>', views.potraviny_shop),
     path('potraviny_shop/<int:user_id>/my_office/', views.my_office),
     path('potraviny_shop/<int:user_id>/my_office/my_admin/', views.my_admin),
+    path('potraviny_shop/<int:user_id>/my_office/my_admin/add_product/', views.add_product),
 ]

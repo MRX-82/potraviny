@@ -14,4 +14,5 @@ class Product(models.Model):
     name = models.CharField(max_length = 20)
     cost = models.IntegerField()
     articl = models.IntegerField()
+    image = models.CharField(max_length=50, default='D')
 

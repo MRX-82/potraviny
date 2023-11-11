@@ -11,3 +11,9 @@ class UserForm(forms.Form):
 class EnterShop(forms.Form):
     login = forms.CharField(max_length=16)
     password = forms.CharField(max_length=20)
+
+class AddProduct(forms.Form):
+    name = forms.CharField(max_length=20)
+    coast = forms.IntegerField()
+    articl = forms.IntegerField()
+    image = forms.CharField(max_length=50)
