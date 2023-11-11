@@ -4,6 +4,11 @@ from .forms import UserForm, EnterShop
 from .models import User
 
 def index(request):
+    """
+    Home page
+    :param request:
+    :return:
+    """
     return render(request, "index.html")
 
 
@@ -27,6 +32,13 @@ def registration_form(request):
         return render(request, "registration_form.html", {"form": userform})
 
 def enter_shop(request):
+    """
+    A function for logging in to the store of authorized users,
+    if there is no user or the password is incorrect, the user will receive
+     a corresponding notification
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         login = request.POST.get("login")
         password = request.POST.get("password")
@@ -45,9 +57,20 @@ def enter_shop(request):
         return render(request, "enter_shop.html", {"form": userform})
 
 def potraviny_shop(request, user_id):
+    """
+    Home page of the store
+    :param request:
+    :param user_id:
+    :return:
+    """
     id = User.objects.get(id=user_id)
     user_id = id.name
     return render(request, "potraviny_shop.html", {"user_id": user_id})
 
 def my_office(request):
+    """
+    Home page of the my office
+    :param request:
+    :return:
+    """
     return render(request, "my_office.html")
