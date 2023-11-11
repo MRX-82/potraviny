@@ -24,9 +24,11 @@ def registration_form(request):
         number = request.POST.get("number")
         email = request.POST.get("email")
         password = request.POST.get("password")
-        registration_info = User.objects.create(name=name, login=login, number=number, email=email, password=password)
+        cash = 0
+        status = 2
+        registration_info = User.objects.create(name=name, login=login, number=number, email=email, password=password, cash=cash, status=status)
         registration_info.save()
-        return HttpResponse(f"list{name}{login}{number}{email}{password}")
+        return HttpResponse(f"list{name}{login}{number}{email}{password}{cash}{status}")
     else:
         userform = UserForm()
         return render(request, "registration_form.html", {"form": userform})
@@ -64,13 +66,32 @@ def potraviny_shop(request, user_id):
     :return:
     """
     id = User.objects.get(id=user_id)
-    user_id = id.name
-    return render(request, "potraviny_shop.html", {"user_id": user_id})
+    user_name = id.name
+    user_id = id.id
+    return render(request, "potraviny_shop.html", {"user_name": user_name, "user_id": user_id})
 
-def my_office(request):
+def my_office(request, user_id):
     """
     Home page of the my office
     :param request:
     :return:
     """
-    return render(request, "my_office.html")
+    id = User.objects.get(id=user_id)
+    user_name = id.name
+    user_status = id.status
+    user_cash = id.cash
+    return render(request, "my_office.html", {"user_name": user_name, "user_cash": user_cash, "user_status": user_status,
+                                              "user_id": user_id})
+
+def my_admin(request, user_id):
+    """
+    This is admin room
+    :param request:
+    :param user_id:
+    :return:
+    """
+    id = User.objects.get(id=user_id)
+    user_name = id.name
+    return render(request, "my_admin.html", {"user_name": user_name})
+
+
