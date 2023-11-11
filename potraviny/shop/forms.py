@@ -7,3 +7,7 @@ class UserForm(forms.Form):
     number = forms.IntegerField()
     email = forms.EmailField()
     password = forms.CharField(max_length=20)
+
+class EnterShop(forms.Form):
+    login = forms.CharField(max_length=16)
+    password = forms.CharField(max_length=20)

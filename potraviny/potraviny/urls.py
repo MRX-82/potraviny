@@ -22,4 +22,6 @@ urlpatterns = [
     path('', views.index),
     path('registration_form/', views.registration_form),
     path('enter_shop/', views.enter_shop),
+    path('potraviny_shop/<int:user_id>', views.potraviny_shop),
+    path('potraviny_shop/my_office/', views.my_office),
 ]

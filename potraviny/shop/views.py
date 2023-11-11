@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from .forms import UserForm
+from django.shortcuts import render, redirect
+from .forms import UserForm, EnterShop
 from .models import User
 
 def index(request):
@@ -27,4 +27,27 @@ def registration_form(request):
         return render(request, "registration_form.html", {"form": userform})
 
 def enter_shop(request):
-    return render(request, "enter_shop.html")
+    if request.method == "POST":
+        login = request.POST.get("login")
+        password = request.POST.get("password")
+        user = User.objects.filter(login=login).exists()
+        if user == False:
+            return HttpResponse(f"Login Error")
+        else:
+            user = User.objects.get(login=login)
+            user_id = user.id
+            if user.password == password and user.login == login:
+                return redirect(f"../potraviny_shop/{user_id}")
+            else:
+                return HttpResponse(f"Password Error")
+    else:
+        userform = EnterShop()
+        return render(request, "enter_shop.html", {"form": userform})
+
+def potraviny_shop(request, user_id):
+    id = User.objects.get(id=user_id)
+    user_id = id.name
+    return render(request, "potraviny_shop.html", {"user_id": user_id})
+
+def my_office(request):
+    return render(request, "my_office.html")
