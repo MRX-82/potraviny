@@ -74,7 +74,7 @@ def potraviny_shop(request, user_id):
         product_back.append(prod.name)
     if request.method == "POST":
         my_product = request.POST.getlist("my_product", ["nic"])
-        return HttpResponse(f"yes{my_product}")
+        return redirect(f"../potraviny_shop/{user_id}/my_office", {"my_product": my_product})
     else:
         return render(request, "potraviny_shop.html", {"product_back": product_back, "user_name": user_name, "user_id": user_id, "all_products": all_products})
 
@@ -123,6 +123,7 @@ def add_product(request, user_id):
         userform = AddProduct()
         return render(request, "add_product.html", {"form": userform, "user_name": user_name})
 
-    #return render(request, "add_product.html", {"user_name": user_name})
+def back_form(request,my_product):
+    return render(request, "my_office.html", {"my_product": my_product})
 
 

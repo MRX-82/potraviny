@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>POTRAVINY</title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+    <h3>Please choise the product</h3>
+  <h1>Hola {{ user_name }}</h1>
+  <button onclick="window.location.href='{{ user_id }}/my_office'" style="color: blue" type="button">My office Potraviny</button>
+  <br>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    {% for one_product in all_products %}
+    <tr>
+      <td><img src="{{one_product.image}}" alt="{{one_product.name}}" height="120"></td>
+      <br>
+      <td><br>name {{one_product.name}} cost {{one_product.cost}} <br>articl {{one_product.articl}}</td>
+      <br>
+      <select multiple name="my_product" size="1">
+        <option>{{one_product.name}}</option>
+      </select>
+      <br>
+    </tr>
+    {% endfor %}
+    <input type="submit" value="Send"/>
+  </form>
+</body>
+</html>

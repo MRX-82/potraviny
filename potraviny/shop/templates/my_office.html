@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Office</title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+  <h1>My office in Potraviny shop {{ user_name }}, {{ user_cash }} guldanu{{ user_status }}<h1>
+  <h2>{{ user_name }}{{ user_id }}
+    {% if user_status == 0 %}
+      <button onclick="window.location.href='my_admin'" style="color: red" type="button">Admin</button>
+    {% endif %}
+  <button>Buy</button>
+  <h3>{{my_product}}yes</h3>
+</body>
+</html>
