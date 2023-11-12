@@ -14,6 +14,9 @@ class EnterShop(forms.Form):
 
 class AddProduct(forms.Form):
     name = forms.CharField(max_length=20)
-    coast = forms.IntegerField()
+    cost = forms.IntegerField()
     articl = forms.IntegerField()
-    image = forms.CharField(max_length=50)
+    image = forms.URLField(max_length=100)
+
+#class BuyProduct(forms.Form):
+    #Articl = forms.CharField()

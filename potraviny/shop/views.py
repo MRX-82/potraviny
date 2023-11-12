@@ -68,7 +68,15 @@ def potraviny_shop(request, user_id):
     id = User.objects.get(id=user_id)
     user_name = id.name
     user_id = id.id
-    return render(request, "potraviny_shop.html", {"user_name": user_name, "user_id": user_id})
+    all_products = Product.objects.all()
+    product_back=[]
+    for prod in all_products:
+        product_back.append(prod.name)
+    if request.method == "POST":
+        my_product = request.POST.getlist("my_product", ["nic"])
+        return HttpResponse(f"yes{my_product}")
+    else:
+        return render(request, "potraviny_shop.html", {"product_back": product_back, "user_name": user_name, "user_id": user_id, "all_products": all_products})
 
 def my_office(request, user_id):
     """
@@ -105,11 +113,12 @@ def add_product(request, user_id):
     user_name = id.name
     if request.method == "POST":
         name = request.POST.get('name')
-        coast = request.POST.get('coast')
-        article = request.POST.get('article')
+        cost = request.POST.get('cost')
+        articl = request.POST.get('articl')
         image = request.POST.get('image')
-        new_product = Product.objects.create(name=name, coast=coast, article=article, image=image)
+        new_product = Product.objects.create(name=name, cost=cost, articl=articl, image=image)
         new_product.save()
+        return render(request, "my_admin.html")
     else:
         userform = AddProduct()
         return render(request, "add_product.html", {"form": userform, "user_name": user_name})
