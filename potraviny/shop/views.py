@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import UserForm, EnterShop, AddProduct, BuyProduct
 from .models import User, Product
+from .logika import backet, payment
 import re
 
 def index(request):
@@ -130,29 +131,18 @@ def add_product(request, user_id):
         return render(request, "add_product.html", {"form": userform, "user_name": user_name})
 
 def back_form(request, user_id):
+    """
+    PayMent products
+    :param request:
+    :param user_id:
+    :return:
+    """
     user = User.objects.get(id=user_id)
     my_product = user.my_product
-    select_products = re.sub(r'[^\w\s]','',my_product)
-    #list_product = list(select_products)
-    m_product = []
-    cost_products = [0]
-    for i in select_products:
-        if i != " ":
-            i = int(i)
-            m_product.append(i)
-    my_product = Product.objects.filter(articl__in = m_product)
-    for number in my_product:
-        cost_products[0] += number.cost
+    my_product, cost_products = backet(my_product)
+    my_cost = user.cash
+    messange = payment(cost_products, my_cost, user_id)
 
 
-    return render(request, "back_form.html", {"my_product": my_product, "user_name": cost_products, "my_cash": user.cash})
+    return render(request, "back_form.html", {"my_product": my_product, "user_name": user.name, "cost_products": cost_products[0], "my_cash": user.cash, "messange": messange})
 
-"""
-def logica(request, user_id, product_id):
-    user = User.objects.get(id=user_id)
-    product = Product.objects.get(id=product_id)
-    product_name = product.name
-    bp = user.product.add(product_name, through_defaults = {"articl": product.articl})
-    bp.save()
-    return HttpResponse(f"list{bp}")
-"""
