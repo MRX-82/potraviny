@@ -20,12 +20,13 @@
       <td><br>name {{one_product.name}} cost {{one_product.cost}} <br>articl {{one_product.articl}}</td>
       <br>
       <select multiple name="my_product" size="1">
-        <option>{{one_product.name}}</option>
+        <option>{{one_product.articl}}</option>
       </select>
       <br>
     </tr>
     {% endfor %}
-    <input type="submit" value="Send"/>
+    <input type="submit" value="Add selected">
+    <button onclick="window.location.href='{{ user_id }}/back_form/'" style="color: blue" type="button">Proceed to checkout</button>
   </form>
 </body>
 </html>

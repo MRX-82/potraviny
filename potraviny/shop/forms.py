@@ -18,5 +18,5 @@ class AddProduct(forms.Form):
     articl = forms.IntegerField()
     image = forms.URLField(max_length=100)
 
-#class BuyProduct(forms.Form):
-    #Articl = forms.CharField()
+class BuyProduct(forms.Form):
+    User.my_product = forms.CharField()

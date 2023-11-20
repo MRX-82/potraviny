@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import UserForm, EnterShop, AddProduct
+from .forms import UserForm, EnterShop, AddProduct, BuyProduct
 from .models import User, Product
+import re
 
 def index(request):
     """
@@ -69,14 +70,19 @@ def potraviny_shop(request, user_id):
     user_name = id.name
     user_id = id.id
     all_products = Product.objects.all()
+    form = BuyProduct()
     product_back=[]
+    product_my_back=[]
     for prod in all_products:
         product_back.append(prod.name)
     if request.method == "POST":
-        my_product = request.POST.getlist("my_product", ["nic"])
-        return redirect(f"../potraviny_shop/{user_id}/my_office", {"my_product": my_product})
+        new_product = request.POST.getlist("my_product")
+        id.my_product = new_product
+        id.save(update_fields = ["my_product"])
+        return redirect(f"../potraviny_shop/{user_id}")
+        #return render(request, "back_form.html", {"user_id": user_id, "new_product": new_product})
     else:
-        return render(request, "potraviny_shop.html", {"product_back": product_back, "user_name": user_name, "user_id": user_id, "all_products": all_products})
+        return render(request, "potraviny_shop.html", {"product_back": product_back, "user_name": user_name, "user_id": user_id, "all_products": all_products, "form": form})
 
 def my_office(request, user_id):
     """
@@ -123,7 +129,30 @@ def add_product(request, user_id):
         userform = AddProduct()
         return render(request, "add_product.html", {"form": userform, "user_name": user_name})
 
-def back_form(request,my_product):
-    return render(request, "my_office.html", {"my_product": my_product})
+def back_form(request, user_id):
+    user = User.objects.get(id=user_id)
+    my_product = user.my_product
+    select_products = re.sub(r'[^\w\s]','',my_product)
+    #list_product = list(select_products)
+    m_product = []
+    cost_products = [0]
+    for i in select_products:
+        if i != " ":
+            i = int(i)
+            m_product.append(i)
+    my_product = Product.objects.filter(articl__in = m_product)
+    for number in my_product:
+        cost_products[0] += number.cost
 
 
+    return render(request, "back_form.html", {"my_product": my_product, "user_name": cost_products, "my_cash": user.cash})
+
+"""
+def logica(request, user_id, product_id):
+    user = User.objects.get(id=user_id)
+    product = Product.objects.get(id=product_id)
+    product_name = product.name
+    bp = user.product.add(product_name, through_defaults = {"articl": product.articl})
+    bp.save()
+    return HttpResponse(f"list{bp}")
+"""
