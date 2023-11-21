@@ -10,7 +10,8 @@
     {% if user_status == 0 %}
       <button onclick="window.location.href='my_admin'" style="color: red" type="button">Admin</button>
     {% endif %}
-  <button onclick="window.location.href='shoping_complete'" style="color: red" type="button">Buy</button><br>
+  <button onclick="window.location.href='shoping_complete'" style="color: red" type="button">Buy</button>
+  <button onclick="window.location.href='../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
   {% for product in my_product %}
   <tr>
     <td><img src="{{product.image}}" alt="{{product.name}}" height="120"></td>

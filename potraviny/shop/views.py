@@ -100,7 +100,7 @@ def shoping_complete(request, user_id):
     user.my_product = []
     user.save(update_fields=["my_product"])
     messange = payment(cost_products, user_cash, user_id)
-    return render(request, "shoping_complete.html", {"messange": messange, "user_name": user.name})
+    return render(request, "shoping_complete.html", {"messange": messange, "user_name": user.name, "user_id": user_id})
 
 def my_admin(request, user_id):
     """
@@ -108,7 +108,7 @@ def my_admin(request, user_id):
     """
     id = User.objects.get(id=user_id)
     user_name = id.name
-    return render(request, "my_admin.html", {"user_name": user_name})
+    return render(request, "my_admin.html", {"user_name": user_name, "user_id": user_id})
 
 def add_product(request, user_id):
     """
@@ -126,7 +126,7 @@ def add_product(request, user_id):
         return redirect(f"/potraviny_shop/{user_id}/my_office/my_admin/add_product/")
     else:
         userform = AddProduct()
-        return render(request, "add_product.html", {"form": userform, "user_name": user_name})
+        return render(request, "add_product.html", {"form": userform, "user_name": user_name, "user_id": user_id})
 
 def back_form(request, user_id):
     """
@@ -136,7 +136,10 @@ def back_form(request, user_id):
     my_product = user.my_product
     my_product, cost_products = backet(my_product)
     my_cost = user.cash
-    return render(request, "back_form.html", {"my_product": my_product, "user_name": user.name, "cost_products": cost_products[0], "my_cash": user.cash})
+    return render(request, "back_form.html", {
+        "my_product": my_product, "user_name": user.name,
+        "cost_products": cost_products[0], "my_cash": user.cash, "user_id": user_id
+    })
 
 def settings_all(request, user_id):
     """
@@ -152,7 +155,7 @@ def settings_all(request, user_id):
     else:
         userform = SettingsAll()
         return render(request, "settings_all.html", {
-            "user_name": user_name, "userform": userform})
+            "user_name": user_name, "userform": userform, "user_id": user_id})
 
 def product_del(request, user_id):
     """

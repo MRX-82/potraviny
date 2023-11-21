@@ -6,6 +6,7 @@
 </head>
 <body>
   <h1>HEllo {{ user_name }} you have {{my_cash}}$, your backet have {{cost_products}}$</h1>
+  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
   <h2>Your products</h2>
   {% for product in my_product %}
   <tr>

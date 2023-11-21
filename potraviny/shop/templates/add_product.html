@@ -6,6 +6,7 @@
 </head>
 <body>
   <h1>Admin {{ user_name }}, please add product</h1>
+  <button onclick="window.location.href='../../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
   <form method="POST">
     {% csrf_token %}
     <table>
