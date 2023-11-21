@@ -5,12 +5,19 @@
   <meta charset="utf-8"/>
 </head>
 <body>
-  <h1>My office in Potraviny shop {{ user_name }}, {{ user_cash }} guldanu{{ user_status }}<h1>
-  <h2>{{ user_name }}{{ user_id }}
+  <h1>My office in Potraviny shop {{ user_name }}, {{ user_cash }}$<h1>
+  <h2>{{ user_name }}
     {% if user_status == 0 %}
       <button onclick="window.location.href='my_admin'" style="color: red" type="button">Admin</button>
     {% endif %}
-  <button>Buy</button>
-  <h3>{{ my_product }}yes</h3>
+  <button onclick="window.location.href='shoping_complete'" style="color: red" type="button">Buy</button><br>
+  {% for product in my_product %}
+  <tr>
+    <td><img src="{{product.image}}" alt="{{product.name}}" height="120"></td>
+    <br>
+    <td><br>name {{product.articl}} cost {{product.cost}} <br>articl {{one_product.articl}}</td>
+    <br>
+  </tr>
+  {% endfor %}
 </body>
 </html>

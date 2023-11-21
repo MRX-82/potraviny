@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import UserForm, EnterShop, AddProduct, BuyProduct
+from .forms import UserForm, EnterShop, AddProduct, BuyProduct, SettingsAll, DeleteProduct, DeleteUser
 from .models import User, Product
-from .logika import backet, payment
+from .logika import backet, payment, money, product_delete, user_delete
 import re
 
 def index(request):
@@ -95,8 +95,22 @@ def my_office(request, user_id):
     user_name = id.name
     user_status = id.status
     user_cash = id.cash
+    new_product = id.my_product
+    my_product, cost_products = backet(new_product)
+    #messange = payment(cost_products, user_cash, user_id)
     return render(request, "my_office.html", {"user_name": user_name, "user_cash": user_cash, "user_status": user_status,
-                                              "user_id": user_id})
+                                              "user_id": user_id, "my_product": my_product, "cost_products": cost_products,
+                                              })
+
+def shoping_complete(request, user_id):
+    user = User.objects.get(id=user_id)
+    new_product = user.my_product
+    my_product, cost_products = backet(new_product)
+    user_cash = user.cash
+    user.my_product = []
+    user.save(update_fields=["my_product"])
+    messange = payment(cost_products, user_cash, user_id)
+    return render(request, "shoping_complete.html", {"messange": messange, "user_name": user.name})
 
 def my_admin(request, user_id):
     """
@@ -125,7 +139,7 @@ def add_product(request, user_id):
         image = request.POST.get('image')
         new_product = Product.objects.create(name=name, cost=cost, articl=articl, image=image)
         new_product.save()
-        return render(request, "my_admin.html")
+        return redirect(f"/potraviny_shop/{user_id}/my_office/my_admin/add_product/")
     else:
         userform = AddProduct()
         return render(request, "add_product.html", {"form": userform, "user_name": user_name})
@@ -141,8 +155,35 @@ def back_form(request, user_id):
     my_product = user.my_product
     my_product, cost_products = backet(my_product)
     my_cost = user.cash
-    messange = payment(cost_products, my_cost, user_id)
+    return render(request, "back_form.html", {"my_product": my_product, "user_name": user.name, "cost_products": cost_products[0], "my_cash": user.cash})
 
+def settings_all(request, user_id):
+    user = User.objects.get(id=user_id)
+    user_name = user.name
+    if request.method == "POST":
+        id = request.POST.get("id")
+        cash = request.POST.get('cash')
+        messange = money(id, cash)
+        return redirect(f"/potraviny_shop/{user_id}/my_office/my_admin/settings_all/")
+    else:
+        userform = SettingsAll()
+        return render(request, "settings_all.html", {
+            "user_name": user_name, "userform": userform})
 
-    return render(request, "back_form.html", {"my_product": my_product, "user_name": user.name, "cost_products": cost_products[0], "my_cash": user.cash, "messange": messange})
+def product_del(request, user_id):
+    if request.method == "POST":
+        id_product_delete = request.POST.get("id_product_delete")
+        messange = product_delete(id_product_delete)
+        return redirect(f"/potraviny_shop/{user_id}/my_office/my_admin/product_delete/")
+    else:
+        product_form = DeleteProduct()
+        return render(request, "product_delete.html", {"product_form": product_form, "user_id": user_id})
 
+def user_del(request, user_id):
+    if request.method == "POST":
+        id_user_delete = request.POST.get("id_user_delete")
+        messange = user_delete(id_user_delete)
+        return redirect(f"/potraviny_shop/{user_id}/my_office/my_admin/user_delete/")
+    else:
+        user_form = DeleteUser()
+        return render(request, "user_delete.html", {"user_form": user_form, "user_id": user_id})

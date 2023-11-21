@@ -27,4 +27,9 @@ urlpatterns = [
     path('potraviny_shop/<int:user_id>/my_office/my_admin/', views.my_admin),
     path('potraviny_shop/<int:user_id>/my_office/my_admin/add_product/', views.add_product),
     path('potraviny_shop/<int:user_id>/back_form/', views.back_form),
+    path('potraviny_shop/<int:user_id>/my_office/my_admin/settings_all/', views.settings_all),
+    path('potraviny_shop/<int:user_id>/my_office/shoping_complete/', views.shoping_complete),
+    path('potraviny_shop/<int:user_id>/my_office/my_admin/product_delete/', views.product_del),
+    path('potraviny_shop/<int:user_id>/my_office/my_admin/user_delete/', views.user_del),
+
 ]

@@ -31,8 +31,26 @@ def payment(cost_products, my_cost, user_id):
         message = ("Don't have money")
         return (message)
     else:
-        message = ("Successfully paid")
+        message = ("Successfully paid, cost shopping ="+str(cost_products[0]))
         user.cash = result
         user.save(update_fields=["cash"])
         return (message)
 
+def money(id, cash):
+    user = User.objects.get(id = id)
+    user.cash = cash
+    user.save(update_fields=["cash"])
+    message = "GOOD WORK"
+    return (message)
+
+def user_delete(id):
+    user = User.objects.get(id = id)
+    user.delete()
+    messange = "User Delete"
+    return (messange)
+
+def product_delete(id):
+    product = Product.objects.get(id = id)
+    product.delete()
+    messange = "Product Delete"
+    return (messange)

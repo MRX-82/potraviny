@@ -20,3 +20,13 @@ class AddProduct(forms.Form):
 
 class BuyProduct(forms.Form):
     User.my_product = forms.CharField()
+
+class SettingsAll(forms.Form):
+    id = forms.IntegerField()
+    cash = forms.IntegerField()
+
+class DeleteProduct(forms.Form):
+    id_product_delete = forms.IntegerField()
+
+class DeleteUser(forms.Form):
+    id_user_delete = forms.IntegerField()

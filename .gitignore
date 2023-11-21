@@ -1,0 +1,14 @@
+__pychache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+db.sqlite3
+
+.vscode/
+.idea/
+
+*.log
+
+media/
