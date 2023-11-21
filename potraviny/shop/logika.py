@@ -4,6 +4,7 @@ This modul do it difficult mathematic functions
 from .models import User, Product
 import re
 
+
 def backet(my_product):
     """
     Correction product in backet
@@ -20,6 +21,7 @@ def backet(my_product):
         cost_products[0] += number.cost
     return (my_product, cost_products)
 
+
 def payment(cost_products, my_cost, user_id):
     """
     Checking the availability of funds and the possibility of payment
@@ -35,6 +37,7 @@ def payment(cost_products, my_cost, user_id):
         user.save(update_fields=["cash"])
         return (message)
 
+
 def money(id, cash):
     """
     Function of adding money to the user.
@@ -45,6 +48,7 @@ def money(id, cash):
     message = "GOOD WORK"
     return (message)
 
+
 def user_delete(id):
     """
     User deletion function.
@@ -53,6 +57,7 @@ def user_delete(id):
     user.delete()
     messange = "User Delete"
     return (messange)
+
 
 def product_delete(id):
     """

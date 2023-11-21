@@ -3,13 +3,14 @@ from django.shortcuts import render, redirect
 from .forms import UserForm, EnterShop, AddProduct, BuyProduct, SettingsAll, DeleteProduct, DeleteUser
 from .models import User, Product
 from .logika import backet, payment, money, product_delete, user_delete
-import re
+
 
 def index(request):
     """
     Home page
     """
     return render(request, "index.html")
+
 
 def registration_form(request):
     """
@@ -29,6 +30,7 @@ def registration_form(request):
     else:
         userform = UserForm()
         return render(request, "registration_form.html", {"form": userform})
+
 
 def enter_shop(request):
     """
@@ -53,6 +55,7 @@ def enter_shop(request):
         userform = EnterShop()
         return render(request, "enter_shop.html", {"form": userform})
 
+
 def potraviny_shop(request, user_id):
     """
     Home page of the store
@@ -63,7 +66,6 @@ def potraviny_shop(request, user_id):
     all_products = Product.objects.all()
     form = BuyProduct()
     product_back=[]
-    product_my_back=[]
     for prod in all_products:
         product_back.append(prod.name)
     if request.method == "POST":
@@ -73,6 +75,7 @@ def potraviny_shop(request, user_id):
         return redirect(f"../potraviny_shop/{user_id}")
     else:
         return render(request, "potraviny_shop.html", {"product_back": product_back, "user_name": user_name, "user_id": user_id, "all_products": all_products, "form": form})
+
 
 def my_office(request, user_id):
     """
@@ -88,6 +91,7 @@ def my_office(request, user_id):
                                               "user_id": user_id, "my_product": my_product, "cost_products": cost_products,
                                               })
 
+
 def shoping_complete(request, user_id):
     """
     The function displays a message about a successful purchase on the display,
@@ -102,6 +106,7 @@ def shoping_complete(request, user_id):
     messange = payment(cost_products, user_cash, user_id)
     return render(request, "shoping_complete.html", {"messange": messange, "user_name": user.name, "user_id": user_id})
 
+
 def my_admin(request, user_id):
     """
     This is admin room
@@ -109,6 +114,7 @@ def my_admin(request, user_id):
     id = User.objects.get(id=user_id)
     user_name = id.name
     return render(request, "my_admin.html", {"user_name": user_name, "user_id": user_id})
+
 
 def add_product(request, user_id):
     """
@@ -128,6 +134,7 @@ def add_product(request, user_id):
         userform = AddProduct()
         return render(request, "add_product.html", {"form": userform, "user_name": user_name, "user_id": user_id})
 
+
 def back_form(request, user_id):
     """
     PayMent products All informations of shoping
@@ -140,6 +147,7 @@ def back_form(request, user_id):
         "my_product": my_product, "user_name": user.name,
         "cost_products": cost_products[0], "my_cash": user.cash, "user_id": user_id
     })
+
 
 def settings_all(request, user_id):
     """
@@ -157,6 +165,7 @@ def settings_all(request, user_id):
         return render(request, "settings_all.html", {
             "user_name": user_name, "userform": userform, "user_id": user_id})
 
+
 def product_del(request, user_id):
     """
     The part of the admin panel is responsible for deleting products.
@@ -168,6 +177,7 @@ def product_del(request, user_id):
     else:
         product_form = DeleteProduct()
         return render(request, "product_delete.html", {"product_form": product_form, "user_id": user_id})
+
 
 def user_del(request, user_id):
     """

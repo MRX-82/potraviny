@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Product(models.Model):
     """
     Model for saving products to the database.
@@ -8,6 +9,7 @@ class Product(models.Model):
     cost = models.IntegerField()
     articl = models.IntegerField()
     image = models.URLField(max_length=100, default='D')
+
 
 class User(models.Model):
     """

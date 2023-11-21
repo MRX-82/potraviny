@@ -1,6 +1,7 @@
 from django import forms
 from .models import User
 
+
 class UserForm(forms.Form):
     """
     New user registration form
@@ -11,12 +12,14 @@ class UserForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(max_length=20)
 
+
 class EnterShop(forms.Form):
     """
     Store entry form.
     """
     login = forms.CharField(max_length=16)
     password = forms.CharField(max_length=20)
+
 
 class AddProduct(forms.Form):
     """
@@ -27,11 +30,13 @@ class AddProduct(forms.Form):
     articl = forms.IntegerField()
     image = forms.URLField(max_length=100)
 
+
 class BuyProduct(forms.Form):
     """
     Form for purchasing goods.
     """
     User.my_product = forms.CharField()
+
 
 class SettingsAll(forms.Form):
     """
@@ -40,11 +45,13 @@ class SettingsAll(forms.Form):
     id = forms.IntegerField()
     cash = forms.IntegerField()
 
+
 class DeleteProduct(forms.Form):
     """
     Form for deleting products.
     """
     id_product_delete = forms.IntegerField()
+
 
 class DeleteUser(forms.Form):
     """
