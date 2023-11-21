@@ -8,17 +8,12 @@ import re
 def index(request):
     """
     Home page
-    :param request:
-    :return:
     """
     return render(request, "index.html")
-
 
 def registration_form(request):
     """
     form for registration new users
-    :param request:
-    :return:
     """
     if request.method == "POST":
         name = request.POST.get("name")
@@ -40,8 +35,6 @@ def enter_shop(request):
     A function for logging in to the store of authorized users,
     if there is no user or the password is incorrect, the user will receive
      a corresponding notification
-    :param request:
-    :return:
     """
     if request.method == "POST":
         login = request.POST.get("login")
@@ -63,9 +56,6 @@ def enter_shop(request):
 def potraviny_shop(request, user_id):
     """
     Home page of the store
-    :param request:
-    :param user_id:
-    :return:
     """
     id = User.objects.get(id=user_id)
     user_name = id.name
@@ -81,15 +71,12 @@ def potraviny_shop(request, user_id):
         id.my_product = new_product
         id.save(update_fields = ["my_product"])
         return redirect(f"../potraviny_shop/{user_id}")
-        #return render(request, "back_form.html", {"user_id": user_id, "new_product": new_product})
     else:
         return render(request, "potraviny_shop.html", {"product_back": product_back, "user_name": user_name, "user_id": user_id, "all_products": all_products, "form": form})
 
 def my_office(request, user_id):
     """
     Home page of the my office
-    :param request:
-    :return:
     """
     id = User.objects.get(id=user_id)
     user_name = id.name
@@ -97,12 +84,15 @@ def my_office(request, user_id):
     user_cash = id.cash
     new_product = id.my_product
     my_product, cost_products = backet(new_product)
-    #messange = payment(cost_products, user_cash, user_id)
     return render(request, "my_office.html", {"user_name": user_name, "user_cash": user_cash, "user_status": user_status,
                                               "user_id": user_id, "my_product": my_product, "cost_products": cost_products,
                                               })
 
 def shoping_complete(request, user_id):
+    """
+    The function displays a message about a successful purchase on the display,
+    and also carries out the purchase itself: withdrawing funds and updating the cart.
+    """
     user = User.objects.get(id=user_id)
     new_product = user.my_product
     my_product, cost_products = backet(new_product)
@@ -115,9 +105,6 @@ def shoping_complete(request, user_id):
 def my_admin(request, user_id):
     """
     This is admin room
-    :param request:
-    :param user_id:
-    :return:
     """
     id = User.objects.get(id=user_id)
     user_name = id.name
@@ -126,9 +113,6 @@ def my_admin(request, user_id):
 def add_product(request, user_id):
     """
     This is function for add Product. Only for Admin
-    :param request:
-    :param user_id:
-    :return:
     """
     id = User.objects.get(id=user_id)
     user_name = id.name
@@ -146,10 +130,7 @@ def add_product(request, user_id):
 
 def back_form(request, user_id):
     """
-    PayMent products
-    :param request:
-    :param user_id:
-    :return:
+    PayMent products All informations of shoping
     """
     user = User.objects.get(id=user_id)
     my_product = user.my_product
@@ -158,6 +139,9 @@ def back_form(request, user_id):
     return render(request, "back_form.html", {"my_product": my_product, "user_name": user.name, "cost_products": cost_products[0], "my_cash": user.cash})
 
 def settings_all(request, user_id):
+    """
+    The part of the admin panel responsible for adding money to users.
+    """
     user = User.objects.get(id=user_id)
     user_name = user.name
     if request.method == "POST":
@@ -171,6 +155,9 @@ def settings_all(request, user_id):
             "user_name": user_name, "userform": userform})
 
 def product_del(request, user_id):
+    """
+    The part of the admin panel is responsible for deleting products.
+    """
     if request.method == "POST":
         id_product_delete = request.POST.get("id_product_delete")
         messange = product_delete(id_product_delete)
@@ -180,6 +167,9 @@ def product_del(request, user_id):
         return render(request, "product_delete.html", {"product_form": product_form, "user_id": user_id})
 
 def user_del(request, user_id):
+    """
+    The part of the admin panel is responsible for deleting users.
+    """
     if request.method == "POST":
         id_user_delete = request.POST.get("id_user_delete")
         messange = user_delete(id_user_delete)

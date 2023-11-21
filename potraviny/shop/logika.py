@@ -23,7 +23,6 @@ def backet(my_product):
 def payment(cost_products, my_cost, user_id):
     """
     Checking the availability of funds and the possibility of payment
-    :return:
     """
     user = User.objects.get(id = user_id)
     result = my_cost - cost_products[0]
@@ -37,6 +36,9 @@ def payment(cost_products, my_cost, user_id):
         return (message)
 
 def money(id, cash):
+    """
+    Function of adding money to the user.
+    """
     user = User.objects.get(id = id)
     user.cash = cash
     user.save(update_fields=["cash"])
@@ -44,12 +46,18 @@ def money(id, cash):
     return (message)
 
 def user_delete(id):
+    """
+    User deletion function.
+    """
     user = User.objects.get(id = id)
     user.delete()
     messange = "User Delete"
     return (messange)
 
 def product_delete(id):
+    """
+    Product deletion function.
+    """
     product = Product.objects.get(id = id)
     product.delete()
     messange = "Product Delete"
