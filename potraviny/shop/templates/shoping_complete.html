@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>shoping complete</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h1>Mr {{user_name}} {{messange}}</h1>
-  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
+<body class="shoping-complete-theme-image">
+  <h1 class="default-text-2">Mr {{user_name}} {{messange}}</h1>
+  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" class="green-button" type="button">GO HOME</button><br>
 </body>
 </html>

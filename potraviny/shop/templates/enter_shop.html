@@ -1,17 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>enter Potraviny</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h1>Please enter your login and password for enter to shop</h1>
-  <form method="POST">
+<body class="enter-shop-theme-image">
+  <h1 class="default-text-2" style="color: red">Please enter your login and password for enter to shop</h1>
+  <form method="POST" style="color: red">
     {% csrf_token %}
   <table>
     {{ form }}
-  </table>
-  <input type="submit" value="Send">
+  </table><br>
+  <input type="submit" value="Send" class="green-button" style="font-size: 36px; position: absolute; left: 100px;">
 </form>
 </body>
 </html>

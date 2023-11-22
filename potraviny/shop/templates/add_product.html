@@ -1,18 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>Add Product</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h1>Admin {{ user_name }}, please add product</h1>
-  <button onclick="window.location.href='../../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
+<body class="add-product-money-theme-image">
+  <h1 class="default-text-2" style="color: purple">Admin {{ user_name }}, please add product</h1>
+  <button onclick="window.location.href='../../../../../potraviny_shop/{{user_id}}'" class="green-button" type="button">GO HOME</button><br>
   <form method="POST">
     {% csrf_token %}
     <table>
       {{ form }}
     </table>
-    <input type="submit", value="Add">
+    <input type="submit", value="Add" class="blue-button" style="position: absolute; left: 10px">
   </form>
 </body>
 </html>

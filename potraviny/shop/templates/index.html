@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>POTRAVINY.COM</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h1>Welcome to Potraviny shop</h1>
-  <button onclick="window.location.href='enter_shop'" style="color: green" type="button">Enter to Potraviny</button>
-  <button onclick="window.location.href='registration_form'" style="color: red" type="button">Registration</button>
+<body class="index-theme-image">
+  <h1 class="default-text">Welcome to Potraviny shop</h1>
+  <button onclick="window.location.href='enter_shop'" class="green-button" type="button">Enter to Potraviny</button>
+  <button onclick="window.location.href='registration_form'" class="red-button"" type="button">Registration</button>
 </body>
 </html>

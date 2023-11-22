@@ -1,13 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>BBB</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h1>HEllo {{ user_name }} you have {{my_cash}}$, your backet have {{cost_products}}$</h1>
-  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
-  <h2>Your products</h2>
+<body class="back-form-theme-image">
+  <h1 class="default-text-3">HEllo {{ user_name }} you have {{my_cash}}$, your backet have {{cost_products}}$</h1>
+  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" class="green-button" type="button">GO HOME</button><br>
+  <h2 class="default-text-2" style="color: red; text-align: left;">Your products</h2>
   {% for product in my_product %}
   <tr>
     <td><img src="{{product.image}}" alt="{{product.name}}" height="120"></td>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>Product Delete</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <button onclick="window.location.href='../../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
+<body class="delete-product-user-theme-image">
+  <button onclick="window.location.href='../../../../../potraviny_shop/{{user_id}}'" class="green-button" type="button">GO HOME</button><br>
   <form method="POST">
     {% csrf_token %}
     <table>
       {{ product_form }}
     </table>
-    <input type="submit" value="Delete">
+    <input type="submit" value="Delete" class="red-button" style="position: absolute; left: 36px">
   </form>
 </body>
 </html>

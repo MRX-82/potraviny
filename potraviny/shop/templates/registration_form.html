@@ -1,17 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>POTRAVINY.COM</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h2>Hello potraviny</h2>
+<body class="registration-form-theme-image">
+  <h2 class="default-text" style="color: purple">Hello potraviny</h2>
   <form method="POST">
     {% csrf_token %}
-  <table>
+  <table style="color: purple">
     {{ form }}
   </table>
-  <input type="submit" value="Send">
+  <input type="submit" value="Send" class="green-button" style="position: absolute; left: 25px">
 </form>
 </body>
 </html>

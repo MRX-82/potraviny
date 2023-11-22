@@ -1,15 +1,17 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>Admin</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css/style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-  <h1>Hello admin{{user_name}}</h1>
-  <button onclick="window.location.href='add_product/'" style="color: green" type="button">Add product</button>
-  <button onclick="window.location.href='settings_all/'" style="color: grey" type="button">Settings All</button>
-  <button onclick="window.location.href='product_delete/'" style="color: red" type="button">Product Delete</button>
-  <button onclick="window.location.href='user_delete/'" style="color: red" type="batton">User Delete</button>
-  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" style="color: green" type="button">GO HOME</button><br>
+<body class="my-admin-theme-image">
+  <h1 class="default-text">Hello admin{{user_name}}</h1>
+  <button onclick="window.location.href='add_product/'" class="blue-button" type="button">Add product</button>
+  <button onclick="window.location.href='settings_all/'" class="blue-button" type="button">Settings All</button>
+  <button onclick="window.location.href='product_delete/'" class="red-button" type="button">Product Delete</button>
+  <button onclick="window.location.href='user_delete/'" class="red-button" type="batton">User Delete</button>
+  <button onclick="window.location.href='../../../../potraviny_shop/{{user_id}}'" class="green-button" type="button">GO HOME</button><br>
 </body>
 </html>

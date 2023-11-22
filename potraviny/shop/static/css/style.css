@@ -1,0 +1,112 @@
+.red-button{
+  font-family: "Bradley Hand";
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  border: 2px solid blue;
+  font-size: 20px;
+}
+
+
+.blue-button{
+  font-family: "Bradley Hand";
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  border: 2px solid grey;
+  font-size: 20px;
+}
+
+
+.green-button{
+  font-family: "Bradley Hand";
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  border: 2px solid red;
+  font-size: 20px;
+}
+
+
+.default-text{
+  font-family: "Bradley Hand";
+  color: black;
+  font-size: 72px;
+  text-align: center;
+}
+
+
+.default-text-2{
+  font-family: "Bradley Hand";
+  color: black;
+  font-size: 32px;
+  text-align: center;
+}
+
+
+.default-text-3{
+  font-family: "Bradley Hand";
+  color: grey;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.index-theme-image{
+  background-image: url('../wallpaper/images_index.jpg');
+  background-size: cover;
+}
+
+
+.enter-shop-theme-image{
+  background-image: url('../wallpaper/images_enter_shop.jpg');
+  background-size: cover;
+}
+
+
+.potraviny-shop-theme-image{
+  background-image: url('../wallpaper/images_potraviny_shop.jpg');
+  background-size: cover;
+}
+
+
+.office-theme-image{
+  background-image: url('../wallpaper/office.jpg');
+  background-size: cover;
+}
+
+
+.shoping-complete-theme-image{
+  background-image: url('../wallpaper/shoping_complete.jpg');
+  background-size: cover;
+}
+
+
+.my-admin-theme-image{
+  background-image: url('../wallpaper/admin.jpg');
+  background-size: cover;
+}
+
+
+.add-product-money-theme-image{
+  background-image: url('../wallpaper/add_prod_mon.jpg');
+  background-size: cover;
+}
+
+
+.delete-product-user-theme-image{
+  background-image: url('../wallpaper/delete.jpg');
+  background-size: cover;
+}
+
+
+.back-form-theme-image{
+  background-image: url('../wallpaper/back_form.jpg');
+  background-size: cover;
+}
+
+
+.registration-form-theme-image{
+  background-image: url('../wallpaper/registration_form.jpg');
+  background-size: cover;
+}

@@ -4,12 +4,13 @@
 <head>
   <title>POTRAVINY</title>
   <meta charset="utf-8"/>
+  <link href="{% static "css\style.css" %}" rel="stylesheet"/>
 </head>
-<body>
-    <h3>Please choise the product</h3>
-  <h1>Hola {{ user_name }}</h1>
-  <button onclick="window.location.href='{{ user_id }}/my_office'" style="color: blue" type="button">My office Potraviny</button>
-  <button onclick="window.location.href='../'" style="color: red" type="button">EXIT</button>
+<body class="potraviny-shop-theme-image">
+  <h1 class="default-text">Hola {{ user_name }}</h1>
+  <h3 class="default-text-2">Please choise the product</h3>
+  <button onclick="window.location.href='{{ user_id }}/my_office'" class="blue-button" style="position: absolute; top: 10px;" type="button">My office Potraviny</button>
+  <button onclick="window.location.href='../'" class="red-button" style="position: absolute; top: 10px; left: 200px;" type="button">EXIT</button>
   <br>
   <br>
   <form method="POST">
@@ -26,8 +27,8 @@
       <br>
     </tr>
     {% endfor %}
-    <input type="submit" value="Add selected">
-    <button onclick="window.location.href='{{ user_id }}/back_form/'" style="color: blue" type="button">Proceed to checkout</button>
+    <input type="submit" value="Add selected" class="green-button">
+    <button onclick="window.location.href='{{ user_id }}/back_form/'" class="blue-button" type="button">Proceed to checkout</button>
   </form>
 </body>
 </html>
